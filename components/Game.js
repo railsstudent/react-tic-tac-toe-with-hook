@@ -1,9 +1,8 @@
 // Checkout ut original tutorial here: https://reactjs.org/tutorial/tutorial.html
 
-import React from 'react';
+import React, { useState } from 'react';
+import { calculateWinner } from '../helpers';
 import Board from './Board';
-
-// import { calculateWinner } from '../helpers';
 
 // const styles = {
 //   width: '200px',
@@ -57,12 +56,23 @@ import Board from './Board';
 
 const Game = () => {
 
-  const handleClick = () => {
-    console.log('handleClicked 2');
+  const [board, setBoard] = useState(Array(9).fill(null))
+  const [xIsNext, setXisNext] = useState(true)
+
+  const handleClick = (i) => {
+    console.log(`handleClicked ${i}`);
+  }
+
+  const jumpTo = () => {
+
+  }
+
+  const renderMoves = () => {
+
   }
 
   return (
-    <Board onClick={handleClick} />
+    <Board squares={board} onClick={handleClick} />
   )
 }
 
