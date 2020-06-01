@@ -58,7 +58,7 @@ import Board from './Board';
 const Game = () => {
 
   const handleClick = () => {
-    console.log('handleClicked');
+    console.log('handleClicked 2');
   }
 
   return (
