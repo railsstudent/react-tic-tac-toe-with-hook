@@ -15,7 +15,10 @@ import React from 'react';
 //   </button>
 // );
 
-const Square = () => <div>Square</div>
-
+const Square = ({ value, onClick }) => (
+  <button onClick={onClick}>
+    {value}
+  </button>
+)
 
 export default Square;

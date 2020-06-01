@@ -1,8 +1,9 @@
 // Checkout ut original tutorial here: https://reactjs.org/tutorial/tutorial.html
 
 import React from 'react';
+import Board from './Board';
+
 // import { calculateWinner } from '../helpers';
-// import Board from './Board';
 
 // const styles = {
 //   width: '200px',
@@ -54,6 +55,15 @@ import React from 'react';
 //   );
 // };
 
-const Game = () => <div>Tic Tac Toe Game</div>
+const Game = () => {
+
+  const handleClick = () => {
+    console.log('handleClicked');
+  }
+
+  return (
+    <Board onClick={handleClick} />
+  )
+}
 
 export default Game;
