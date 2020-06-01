@@ -1,8 +1,19 @@
 import React from 'react';
 import Square from './Square';
 
+const styles = {
+  border: '2px solid darkblue',
+  borderRadius: '10px',
+  width: '250px',
+  height: '250px',
+  margin: '0 auto',
+  display: 'grid',
+  gridTemplateColumns: 'repeat(3, 1fr)',
+  gridTemplateRows: 'repeat(3, 1fr)'
+}
+
 const Board = ({ squares, onClick }) => (
-  <div>
+  <div style={styles}>
     <Square value="1" onClick={() => onClick()} />
     <Square value="2" onClick={() => onClick()} />
     <Square value="3" onClick={() => onClick()} />
