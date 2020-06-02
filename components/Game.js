@@ -4,10 +4,10 @@ import React, { useState } from 'react';
 import { calculateWinner } from '../helpers';
 import Board from './Board';
 
-// const styles = {
-//   width: '200px',
-//   margin: '20px auto'
-// };
+const styles = {
+  width: '200px',
+  margin: '20px auto'
+};
 
 // const Game = () => {
 //   const [history, setHistory] = useState([Array(9).fill(null)]);
@@ -61,7 +61,6 @@ const Game = () => {
   const winner = calculateWinner(board)
 
   const handleClick = (i) => {
-    console.log(`handleClicked ${i}`);
     const boardCopy = [...board]
     // If user click an occupied square or if game is won, return
     if (winner || boardCopy[i]) {
@@ -76,12 +75,21 @@ const Game = () => {
 
   }
 
-  const renderMoves = () => {
-
-  }
-
+  const renderMoves = () => 
+    (
+      <button onClick={() => setBoard(Array(9).fill(null))}>
+        Start Game
+      </button>
+    )
+  
   return (
-    <Board squares={board} onClick={handleClick} />
+    <>
+      <Board squares={board} onClick={handleClick} />
+      <div style={styles}>
+        <p>{ winner ? `Winner: ${winner}` : `Next player: ${ xIsNext ? 'X': 'O' }` }</p>
+        { renderMoves() }
+      </div>
+    </>
   )
 }
 
