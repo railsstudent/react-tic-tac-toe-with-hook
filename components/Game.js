@@ -81,12 +81,23 @@ const Game = () => {
         Start Game
       </button>
     )
+
+  const gameStatus = () => {
+    if (winner) {
+      return <p>Winner: {winner}</p>
+    }
+    if (board.filter(b => b ===  null).length <= 0) {
+      return <p>Tie game</p>
+    }
+
+    return <p>Next player: { xIsNext ? 'X': 'O' }</p>
+  } 
   
   return (
     <>
       <Board squares={board} onClick={handleClick} />
       <div style={styles}>
-        <p>{ winner ? `Winner: ${winner}` : `Next player: ${ xIsNext ? 'X': 'O' }` }</p>
+        { gameStatus() }
         { renderMoves() }
       </div>
     </>
