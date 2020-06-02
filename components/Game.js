@@ -55,38 +55,48 @@ const styles = {
 // };
 
 const Game = () => {
-
-  const [board, setBoard] = useState(Array(9).fill(null))
+  const [history, setHistory] = useState([Array(9).fill(null)])
+  const [stepNumber, setStepNumber] = useState(0)
   const [xIsNext, setXisNext] = useState(true)
-  const winner = calculateWinner(board)
+
+  console.log('history', history)
+  console.log('stepNumber', stepNumber)
+  const winner = calculateWinner(history[stepNumber])
 
   const handleClick = (i) => {
-    const boardCopy = [...board]
+    const timeInHistory = history.slice(0, stepNumber + 1)
+    const current = timeInHistory[stepNumber]
+    const squares = [...current]
     // If user click an occupied square or if game is won, return
-    if (winner || boardCopy[i]) {
+    if (winner || squares[i]) {
       return;
     }
-    boardCopy[i] = xIsNext ? 'X' : 'O'
-    setBoard(boardCopy)
+    squares[i] = xIsNext ? 'X' : 'O'
+    setHistory([...timeInHistory, squares])
+    setStepNumber(timeInHistory.length)
     setXisNext(!xIsNext)
   }
 
-  const jumpTo = () => {
-
-  }
+  const jumpTo = step => {
+     setStepNumber(step);
+     setXisNext(step % 2 === 0);
+  };
 
   const renderMoves = () => 
-    (
-      <button onClick={() => setBoard(Array(9).fill(null))}>
-        Start Game
-      </button>
-    )
+    history.map((_step, move) => {
+      const destination = move ? `Got to move #${move}` : 'Go to start';
+      return (
+        <li key={move}>
+          <button onClick={() => jumpTo(move)}>{destination}</button>
+        </li>
+      )
+    })
 
   const gameStatus = () => {
     if (winner) {
       return <p>Winner: {winner}</p>
     }
-    if (board.filter(b => b ===  null).length <= 0) {
+    if (history[stepNumber].filter(b => b ===  null).length <= 0) {
       return <p>Tie game</p>
     }
 
@@ -95,7 +105,7 @@ const Game = () => {
   
   return (
     <>
-      <Board squares={board} onClick={handleClick} />
+      <Board squares={history[stepNumber]} onClick={handleClick} />
       <div style={styles}>
         { gameStatus() }
         { renderMoves() }
