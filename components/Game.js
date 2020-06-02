@@ -42,7 +42,7 @@ const Game = () => {
       marginBottom: '0.5rem'
     }
 
-    return history.map((_step, move) => {
+    return history.map((_, move) => {
       const destination = move ? `Got to move #${move}` : 'Go to start';
       return (
         <li key={move} style={buttonStyles}>
